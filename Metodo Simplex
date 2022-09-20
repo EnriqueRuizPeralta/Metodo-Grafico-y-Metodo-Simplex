@@ -1,0 +1,28 @@
+library(lpSolve)
+
+# Se guardan en una matriz los coeficientes de la función objetivo
+funcion_objetivo <- c(11, 9)
+funcion_objetivo
+# Asignar los coeficientes de las desigualdades
+# 0.4128x1 + 0.3348x2   => 1200000      0.4128   0.3348   (1)
+# 0.24x1 + 0.4185x2 => 600000           0.24   0.4185     (2)
+# Definir el número de filas en 3
+restriciones_derecho <- matrix(c(0.4128,0.24,0.3348,0.4185), nrow = 2, byrow = T)
+
+# Se muestra el valor de la matriz
+restriciones_derecho
+
+# Se guarda en una matriz los simbolos de las desigualdades
+restriccion.direccion <- c(">=", ">=", ">=")
+restriccion.direccion
+# Asignar los valores del lado derecho de las desiguldades
+# 0.4128x1 + 0.3348x2  => 1,200,000         0.4128   0.3348     (1)
+# 0.4185x1 + 0.24x2  =>600,000              0.4185   0.24   (2)
+
+lado_derecho.restriccion <- c(1200000,600000)
+lado_derecho.restriccion
+# Se ejecuta la instrucción para mostrar el resultado que minimize  la función
+lp(direction = "min", objective.in = funcion_objetivo, const.mat =restriciones_derecho, const.dir = restriccion.direccion, const.rhs = lado_derecho.restriccion, int.vec = c(1, 2, 3, 4, 5), all.int = T)
+
+# Se ejecuta la instrucción para mostrar los valores de x1 y x2.
+lp(direction = "min", objective.in = funcion_objetivo, const.mat =restriciones_derecho, const.dir = restriccion.direccion, const.rhs = lado_derecho.restriccion, int.vec = c(1, 2, 3, 4, 5), all.int = T)$solution
