@@ -1,0 +1,16 @@
+library(matlib)
+# Asignar los coeficientes de las restricciones
+# 0.4128x1 + 0.3348x2  => 1,200,000         0.4128   0.3348     (1)
+# 0.4185x1 + 0.24x2  =>600,000              0.4185   0.24   (2)
+
+# Definir el número de columnas en 2 y el número de filas en 2
+A<-matrix(c(0.4128,0.24,0.3348,0.4185), ncol = 2, nrow = 2)
+
+# Asignar los valores del lado derecho de las desigualdades
+# 0.4128x1 + 0.3348x2    => 1,200,000    0.4128   0.3348 (1)
+# 0.24x1 + 0.24x2  => 600,000            0.4128   0.24     (2)
+
+b<- c(1200000,600000)
+
+# Se grafican las ecuaciones
+plotEqn(A,b, xlim=c(0,1200000), labels=TRUE)
